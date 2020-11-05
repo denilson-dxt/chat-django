@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 import re
 from django.core.mail import send_mail
+import uuid
 
 
 # Create your models here.
@@ -64,4 +65,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email])
 
 
-
+class UserSystem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)

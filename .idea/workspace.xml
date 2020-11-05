@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b53c4d-f318-42d6-ab24-58de6dd821ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/apiviews.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/serializers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/myonchat/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0002_teste.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0003_delete_teste.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chatapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chatapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myonchat/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/myonchat/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myonchat/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myonchat/urls.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +56,14 @@
       <option name="presentableId" value="Default" />
       <updated>1604510079174</updated>
     </task>
+    <task id="LOCAL-00001" summary="User Terminado">
+      <created>1604571928205</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604571928205</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -80,5 +81,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="User Terminado" />
+    <option name="LAST_COMMIT_MESSAGE" value="User Terminado" />
   </component>
 </project>
