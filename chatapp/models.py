@@ -30,7 +30,6 @@ class UserManager(BaseUserManager):
         return User
 
 
-
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(_("username"), max_length=150, unique=False,
                                 help_text=_("Required"),
@@ -46,8 +45,8 @@ class User(AbstractBaseUser, PermissionsMixin):
                                                                               "treated  as active "))
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
-    USERNAME_FIELD =  "email"
-    REQUIRED_FIELDS = ["username", "email"]
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = ["username", ]
 
     objects = UserManager()
 
@@ -63,5 +62,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
+
 
 
