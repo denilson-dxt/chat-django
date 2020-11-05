@@ -64,7 +64,42 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
 
+    def __str__(self):
+        return self.username
+
 
 class UserSystem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+
+    def __str__(self):
+        return self.user
+
+
+class Friend(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blocked = models.BooleanField(default=False)
+    now = timezone.now()
+    friendship_day = models.DateTimeField(default=now)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+
+
+class ReceivedRequest(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    now = timezone.now()
+    received_day = models.DateTimeField(default=now)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+    acepted = models.BooleanField(default=False)
+    denied = models.BooleanField(default=False)
+
+
+class SentRequest(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE)
+    now = timezone.now()
+    sent_day = models.DateTimeField(default=now)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+    acepted = models.BooleanField(default=False)
+    denied = models.BooleanField(default=False)

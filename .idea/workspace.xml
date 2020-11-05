@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b53c4d-f318-42d6-ab24-58de6dd821ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0002_teste.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0003_delete_teste.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0005_delete_usersystem.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0006_usersystem.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0007_friend_recivedrequest_sentrequest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0008_auto_20201105_1338.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0009_auto_20201105_1338.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chatapp/apiviews.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/apiviews.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chatapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
     </list>
