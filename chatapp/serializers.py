@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Friend, ReceivedRequest, SentRequest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -21,3 +21,26 @@ class CreateUserSerializer(serializers.ModelSerializer):
             instance.save()
         instance.save()
         return instance
+
+
+class FriendsSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    class Meta:
+        model = Friend
+        fields = "__all__"
+
+
+class ReceivedRequestsSerializer(serializers.ModelSerializer):
+    sender = serializers.StringRelatedField()
+
+    class Meta:
+        model = ReceivedRequest
+        fields = "__all__"
+
+
+class SentRequestsSerializer(serializers.ModelSerializer):
+    receiver = serializers.StringRelatedField()
+
+    class Meta:
+        model = SentRequest
+        fields = "__all__"

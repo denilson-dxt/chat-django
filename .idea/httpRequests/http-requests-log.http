@@ -1,0 +1,12 @@
+GET http://localhost:8000/api/users
+Accept: application/json
+
+<> 2020-11-06T080906.401.json
+
+###
+
+GET http://localhost:80/api/item?id=99
+Accept: application/json
+
+###
+

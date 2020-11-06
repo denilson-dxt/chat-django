@@ -45,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_("is active"), default=True, help_text=_("Designates whether this user should be "
                                                                               "treated  as active "))
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", ]
@@ -103,3 +104,8 @@ class SentRequest(models.Model):
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
     acepted = models.BooleanField(default=False)
     denied = models.BooleanField(default=False)
+
+
+class Test(models.Model):
+    name = models.BooleanField(default=True)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)

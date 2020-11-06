@@ -126,7 +126,8 @@ STATIC_URL = '/static/'
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5050"
+    "http://localhost:5050",
+    "http://127.0.0.1:7000"
 ]
 
 REST_FRAMEWORK = {
