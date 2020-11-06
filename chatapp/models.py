@@ -124,3 +124,19 @@ class Message(models.Model):
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
     now = timezone.now()
     sent_day = models.DateTimeField(default=now)
+
+
+class Publication(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    context = models.TextField()
+    now = timezone.now()
+    likes = models.PositiveIntegerField(default=0)
+    pub_date = models.DateTimeField(default=now)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+
+
+class Like(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    publication = models.ForeignKey(Publication, on_delete=models.CASCADE)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d4b53c4d-f318-42d6-ab24-58de6dd821ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0017_auto_20201106_1047.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0018_auto_20201106_2054.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0019_auto_20201106_2348.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chatapp/migrations/0020_auto_20201106_2351.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chatapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chatapp/apiviews.py" beforeDir="false" afterPath="$PROJECT_DIR$/chatapp/apiviews.py" afterDir="false" />
@@ -125,7 +125,7 @@
       <updated>1604510079174</updated>
       <workItem from="1604635327438" duration="959000" />
       <workItem from="1604639457984" duration="10239000" />
-      <workItem from="1604687308808" duration="7764000" />
+      <workItem from="1604687308808" duration="10670000" />
     </task>
     <task id="LOCAL-00001" summary="User Terminado">
       <created>1604571928205</created>

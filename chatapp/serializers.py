@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Friend, ReceivedRequest, SentRequest, Message, Chat
+from .models import User, Friend, ReceivedRequest, SentRequest, Message, Chat, Publication, Like
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -59,4 +59,10 @@ class ChatSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Chat
+        fields = "__all__"
+
+
+class PublicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Publication
         fields = "__all__"

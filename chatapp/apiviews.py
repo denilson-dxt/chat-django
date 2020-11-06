@@ -1,6 +1,6 @@
 from .serializers import UserSerializer, CreateUserSerializer, FriendsSerializer, ReceivedRequestsSerializer,\
-    SentRequestsSerializer, MessageSerializer, ChatSerializer
-from .models import User, UserSystem, Friend, ReceivedRequest, SentRequest, Chat, Message
+    SentRequestsSerializer, MessageSerializer, ChatSerializer, PublicationSerializer
+from .models import User, UserSystem, Friend, ReceivedRequest, SentRequest, Chat, Message, Publication, Like
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -214,4 +214,34 @@ class SendMessage(APIView):
         message = Message(chat=receiver_chat, sender=request.user, message=request.data["message"])
         message.save()
 
+        return Response({})
+
+
+class GetPublications(APIView):
+    def get(self, request):
+        pubs = Publication.objects.all()
+        pubs = PublicationSerializer(pubs, many=True)
+        print(pubs)
+        return Response(pubs.data)
+
+
+class CreatePublication(APIView):
+    def post(self, request):
+        print(request.data)
+        user_system = UserSystem.objects.get(user=request.user)
+        pub = Publication(user_system=user_system, context=request.data["context"])
+        pub.save()
+        pub = PublicationSerializer(pub)
+        return Response(pub.data)
+
+
+class LikePublication(APIView):
+    def post(self, request):
+        print(request.data["pub"])
+        user_system = UserSystem.objects.get(user=request.user)
+        pub = Publication.objects.get(long_id=request.data["pub"])
+        like = Like(user_system=user_system, publication=pub)
+        like.save()
+        pub.likes += 1
+        pub.save()
         return Response({})
