@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Friend, ReceivedRequest, SentRequest
+from .models import User, Friend, ReceivedRequest, SentRequest, Message, Chat
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -43,4 +43,20 @@ class SentRequestsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SentRequest
+        fields = "__all__"
+
+
+class MessageSerializer(serializers.ModelSerializer):
+    sender = serializers.StringRelatedField()
+
+    class Meta:
+        model = Message
+        fields = "__all__"
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    receiver = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Chat
         fields = "__all__"

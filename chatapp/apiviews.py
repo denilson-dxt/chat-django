@@ -1,5 +1,6 @@
-from .serializers import UserSerializer, CreateUserSerializer, FriendsSerializer, ReceivedRequestsSerializer, SentRequestsSerializer
-from .models import User, UserSystem, Friend, ReceivedRequest, SentRequest
+from .serializers import UserSerializer, CreateUserSerializer, FriendsSerializer, ReceivedRequestsSerializer,\
+    SentRequestsSerializer, MessageSerializer, ChatSerializer
+from .models import User, UserSystem, Friend, ReceivedRequest, SentRequest, Chat, Message
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -141,6 +142,76 @@ class RespondeRequest(APIView):
 
 class GetChat(APIView):
     def get(self, request):
-        print("Obetendo chat")
-        print(request.GET.get("user"))
+        user_system = UserSystem.objects.get(user=request.user)
+
+        print(request.GET.get("from"))
+        data = {}
+        if request.GET.get("from") == "user":
+            receiver_user = User.objects.get(long_id=request.GET.get("user"))
+            if user_system.chat_set.filter(receiver=receiver_user).exists():
+                print("Existe")
+                chat = user_system.chat_set.get(receiver=receiver_user)
+                print(chat.message_set.all())
+                messages = chat.message_set.all()
+                messages = MessageSerializer(messages, many=True)
+                data["messages"] = messages.data
+            else:
+                print("Nao existe")
+                data = {"status": "chat nao criado ainda"}
+        else:
+            chat = Chat.objects.get(long_id=request.GET.get("user"))
+            messages = chat.message_set.all()
+            messages = MessageSerializer(messages, many=True)
+            data["messages"] = messages.data
+
+        return Response(data)
+
+
+class GetChats(APIView):
+    def get(self, request):
+        user_system = UserSystem.objects.get(user=request.user)
+        chats = user_system.chat_set.all()
+        chats = ChatSerializer(chats, many=True)
+        return Response(chats.data)
+
+
+class SendMessage(APIView):
+    def post(self, request):
+        user_system = UserSystem.objects.get(user=request.user)
+        print(request.data)
+        if request.data["from"] == "user":
+
+            receiver_user = User.objects.get(long_id=request.data["user"])
+            receiver_system = UserSystem.objects.get(user=receiver_user)
+            if not user_system.chat_set.filter(receiver=receiver_user).exists():
+
+                # Creating chat for the current user
+                user_chat = Chat(user_system=user_system, receiver=receiver_user)
+                user_chat.save()
+
+                # Create chat for the receiver user
+
+                receiver_chat = Chat(user_system=receiver_system, receiver=request.user)
+                receiver_chat.save()
+
+            else:
+                user_chat = user_system.chat_set.get(receiver=receiver_user)
+                receiver_chat = receiver_system.chat_set.get(receiver=request.user)
+
+            print("Vem de user")
+        else:
+            print("Vem de chat")
+            user_chat = Chat.objects.get(long_id=request.data["user"])
+            receiver_user = user_chat.receiver
+            receiver_system = UserSystem.objects.get(user=receiver_user)
+            receiver_chat = receiver_system.chat_set.get(receiver=request.user)
+
+        # Create the message for the current user
+        message = Message(chat=user_chat, sender=request.user, message=request.data["message"])
+        message.save()
+
+        # Creating message for the receiver user
+        message = Message(chat=receiver_chat, sender=request.user, message=request.data["message"])
+        message.save()
+
         return Response({})

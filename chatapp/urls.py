@@ -1,6 +1,6 @@
 from django.urls import path
 from .apiviews import UsersView, get_logged_user, CreateUserView, SendFriendRequest, GetFriends,\
-    GetReceivedRequests, GetSentRequests, RespondeRequest, GetChat
+    GetReceivedRequests, GetSentRequests, RespondeRequest, GetChat, SendMessage, GetChats
 from rest_framework_jwt.views import obtain_jwt_token
 
 urlpatterns = [
@@ -14,4 +14,6 @@ urlpatterns = [
     path("api/get-sent-requests", GetSentRequests.as_view()),
     path("api/responde-request", RespondeRequest.as_view()),
     path("api/get-chat", GetChat.as_view()),
+    path("api/get-chats", GetChats.as_view()),
+    path("api/send-message", SendMessage.as_view()),
 ]

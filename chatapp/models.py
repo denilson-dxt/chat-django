@@ -109,3 +109,18 @@ class SentRequest(models.Model):
 class Test(models.Model):
     name = models.BooleanField(default=True)
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+
+
+class Chat(models.Model):
+    user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+
+
+class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField(blank=True, null=True)
+    long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+    now = timezone.now()
+    sent_day = models.DateTimeField(default=now)
