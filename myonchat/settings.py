@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import datetime
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,6 +45,7 @@ INSTALLED_APPS = [
     "chatapp",
     "rest_framework",
     "corsheaders",
+    "cloudinary",
 ]
 
 MIDDLEWARE = [
@@ -124,10 +129,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+cloudinary.config(
+  cloud_name="myonlinechat",
+  api_key="277875738352558",
+  api_secret="r402XeEhoRfb4Qx0-evrcMfj_3I"
+)
+
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5050",
-    "http://127.0.0.1:7000"
+    "http://127.0.0.1:7000",
+    "http://localhost:3000"
 ]
 
 REST_FRAMEWORK = {
@@ -142,5 +154,6 @@ REST_FRAMEWORK = {
 }
 
 JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': "myonchat.utils.my_jwt_response_handler"
+    'JWT_RESPONSE_PAYLOAD_HANDLER': "myonchat.utils.my_jwt_response_handler",
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=10)
 }

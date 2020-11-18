@@ -6,6 +6,7 @@ from django.utils import timezone
 import re
 from django.core.mail import send_mail
 import uuid
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -46,6 +47,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                                                                               "treated  as active "))
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
+    perfil_picture = CloudinaryField("image", blank=True, null=True, folder=f"Perfil")
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username", ]
@@ -115,7 +117,8 @@ class Chat(models.Model):
     user_system = models.ForeignKey(UserSystem, on_delete=models.CASCADE)
     receiver = models.ForeignKey(User, on_delete=models.CASCADE)
     long_id = models.UUIDField(default=uuid.uuid4, unique=True)
-
+    last_message = models.TextField(blank=True, null=True, default="")
+    new_messages = models.IntegerField(blank=True, null=True, default=0)
 
 class Message(models.Model):
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE)

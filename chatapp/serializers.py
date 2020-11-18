@@ -1,10 +1,18 @@
 from rest_framework import serializers
-from .models import User, Friend, ReceivedRequest, SentRequest, Message, Chat, Publication, Like
+from .models import User, Friend, ReceivedRequest, SentRequest, Message, Chat, Publication, Like, UserSystem
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = "__all__"
+
+
+class UserSystemSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = UserSystem
         fields = "__all__"
 
 
@@ -31,7 +39,7 @@ class FriendsSerializer(serializers.ModelSerializer):
 
 
 class ReceivedRequestsSerializer(serializers.ModelSerializer):
-    sender = serializers.StringRelatedField()
+    sender = UserSerializer(read_only=True)
 
     class Meta:
         model = ReceivedRequest
@@ -39,18 +47,10 @@ class ReceivedRequestsSerializer(serializers.ModelSerializer):
 
 
 class SentRequestsSerializer(serializers.ModelSerializer):
-    receiver = serializers.StringRelatedField()
+    receiver = UserSerializer(read_only=True)
 
     class Meta:
         model = SentRequest
-        fields = "__all__"
-
-
-class MessageSerializer(serializers.ModelSerializer):
-    sender = serializers.StringRelatedField()
-
-    class Meta:
-        model = Message
         fields = "__all__"
 
 
@@ -62,7 +62,25 @@ class ChatSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MessageSerializer(serializers.ModelSerializer):
+    sender = UserSerializer(read_only=True)
+    chat = ChatSerializer(read_only=True)
+    class Meta:
+        model = Message
+        fields = "__all__"
+
+
+class LikeSerializer(serializers.ModelSerializer):
+    user_system = UserSystemSerializer(read_only=True)
+    class Meta:
+        model = Like
+        fields = ["user_system"]
+
+
 class PublicationSerializer(serializers.ModelSerializer):
+    user_system = UserSystemSerializer(read_only=True)
+    like_set = LikeSerializer(read_only=True, many=True, required=False)
+
     class Meta:
         model = Publication
-        fields = "__all__"
+        fields = ["context", "like_set", "likes", "pub_date", "long_id", "user_system"]
